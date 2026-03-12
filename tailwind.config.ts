@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Satoshi', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -46,6 +49,13 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        unblur: {
+          deep: "hsl(var(--unblur-deep))",
+          primary: "hsl(var(--unblur-primary))",
+          light: "hsl(var(--unblur-light))",
+          glow: "hsl(var(--unblur-glow))",
+          silver: "hsl(var(--unblur-silver))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
