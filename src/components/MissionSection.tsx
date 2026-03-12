@@ -52,8 +52,8 @@ const MissionSection = () => {
             Our Vision
           </p>
           <p className="text-body text-muted-foreground" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.25rem)' }}>
-            A guidance system helping students and young professionals take practical
-            next steps with confidence — through relatable mentorship, actionable clarity steps,
+            A guidance system helping students take practical
+            next steps with confidence, through relatable mentorship, actionable clarity steps,
             and human guidance powered by future AI insights.
           </p>
         </div>

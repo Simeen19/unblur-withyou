@@ -24,7 +24,7 @@ const Navbar = () => {
         {[
           { label: "Home", id: "home" },
           { label: "Mission", id: "mission" },
-          { label: "Process", id: "process" },
+          { label: "Approach", id: "process" },
           { label: "Contact", id: "contact" },
         ].map((item) => (
           <button

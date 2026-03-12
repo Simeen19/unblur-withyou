@@ -9,18 +9,18 @@ const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const socials = [
   {
     icon: Mail,
-    label: "UnBlur.withyou@gmail.com",
-    href: "mailto:UnBlur.withyou@gmail.com",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=UnBlur.withyou@gmail.com",
+    label: "Email",
   },
   {
     icon: Linkedin,
-    label: "LinkedIn",
     href: "https://www.linkedin.com/company/unblurwithyou",
+    label: "LinkedIn",
   },
   {
     icon: Instagram,
-    label: "Instagram",
     href: "https://www.instagram.com/unblur.withyou",
+    label: "Instagram",
   },
 ];
 
@@ -67,18 +67,14 @@ const ContactSection = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease }}
             >
-              <p className="text-sm font-medium tracking-widest uppercase text-unblur-primary mb-3 text-center">
-                Get in Touch
-              </p>
+          
               <h2
                 className="text-display text-foreground mb-3 text-center"
                 style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
               >
-                Let's build something clear.
+               Get in Touch
               </h2>
-              <p className="text-muted-foreground text-center mb-10 text-sm">
-                Have a question or want to work with us? Drop us a message.
-              </p>
+              
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                 <div>
@@ -158,10 +154,10 @@ const ContactSection = () => {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 text-muted-foreground hover:text-foreground transition-colors duration-200 group"
+              aria-label={s.label}
+              className="text-muted-foreground hover:text-foreground transition-colors duration-200 group"
             >
               <s.icon className="w-5 h-5 group-hover:text-unblur-primary transition-colors duration-200" />
-              <span className="text-sm hidden sm:inline">{s.label}</span>
             </a>
           ))}
         </div>
