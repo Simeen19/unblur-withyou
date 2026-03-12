@@ -1,73 +1,79 @@
-# Welcome to your Lovable project
+# Unblur
 
-## Project info
+Unblur is a web application that helps users remove blur from images and restore visual clarity using modern AI-powered tools.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Live Website
 
-## How can I edit this code?
 
-There are several ways of editing your application.
 
-**Use Lovable**
+## Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+This project is built using:
 
-Changes made via Lovable will be committed automatically to this repo.
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* shadcn/ui
+* Supabase (backend, database, authentication)
+* Vercel (deployment)
 
-**Use your preferred IDE**
+## Project Structure
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Frontend is built with Vite and React, while Supabase provides the backend services including database, APIs, and authentication.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```
+Frontend (React + Vite)
+        ↓
+Supabase API
+        ↓
+PostgreSQL Database
+```
 
-Follow these steps:
+## Local Development
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+To run this project locally:
+
+```
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Go into the project directory
+cd unblur
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will start locally with hot reload.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Environment Variables
 
-**Use GitHub Codespaces**
+Create a `.env` file in the root directory and add:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key
+```
 
-## What technologies are used for this project?
+These connect the frontend to the Supabase backend.
 
-This project is built with:
+## Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The project is deployed using Vercel.
 
-## How can I deploy this project?
+Deployment steps:
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+1. Push the project to GitHub
+2. Import the repository into Vercel
+3. Add environment variables
+4. Deploy
 
-## Can I connect a custom domain to my Lovable project?
+## Contributing
 
-Yes, you can!
+Contributions and suggestions are welcome.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+If you find a bug or want to improve the project, feel free to open an issue or submit a pull request.
