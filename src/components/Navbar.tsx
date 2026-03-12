@@ -12,14 +12,13 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-background/80 backdrop-blur-md border-b border-border/50"
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 bg-background/80 backdrop-blur-md border-b border-border/50"
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 4, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
     >
-      <button onClick={() => scrollTo("home")} className="flex items-center gap-2">
-        <img src={logo} alt="UnBlur" className="h-8 w-8 object-contain" />
-        <span className="font-bold text-lg text-foreground tracking-tight">UnBlur</span>
+      <button onClick={() => scrollTo("home")}>
+        <img src={logo} alt="UnBlur" className="h-12 w-12 object-contain" />
       </button>
       <div className="flex items-center gap-8">
         {[
