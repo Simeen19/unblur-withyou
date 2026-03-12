@@ -6,17 +6,15 @@ const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const HeroSection = () => {
   return (
     <section className="relative min-h-svh flex flex-col items-center justify-center overflow-hidden bg-background">
-      {/* Subtle grid background */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `radial-gradient(hsl(var(--unblur-primary)) 1px, transparent 1px)`,
         backgroundSize: '32px 32px',
       }} />
 
-      {/* Main wordmark */}
       <div className="relative z-10 flex items-baseline">
         <motion.span
-          className="text-display text-foreground"
-          style={{ fontSize: 'clamp(4rem, 15vw, 12rem)' }}
+          className="text-display"
+          style={{ fontSize: 'clamp(4rem, 15vw, 12rem)', color: '#6A4C93' }}
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 2, duration: 1.2, ease }}
@@ -24,8 +22,8 @@ const HeroSection = () => {
           Un
         </motion.span>
         <motion.span
-          className="text-display text-foreground"
-          style={{ fontSize: 'clamp(4rem, 15vw, 12rem)' }}
+          className="text-display"
+          style={{ fontSize: 'clamp(4rem, 15vw, 12rem)', color: '#3B1A47' }}
           initial={{ filter: 'blur(20px)', opacity: 0.6 }}
           animate={{ filter: 'blur(0px)', opacity: 1 }}
           transition={{ delay: 2, duration: 2, ease }}
@@ -34,7 +32,6 @@ const HeroSection = () => {
         </motion.span>
       </div>
 
-      {/* Tagline */}
       <motion.p
         className="text-body text-muted-foreground mt-6 text-center px-6"
         style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)' }}
@@ -45,7 +42,6 @@ const HeroSection = () => {
         Helping you see your next steps clearly
       </motion.p>
 
-      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-10 flex flex-col items-center gap-2 text-muted-foreground"
         initial={{ opacity: 0 }}

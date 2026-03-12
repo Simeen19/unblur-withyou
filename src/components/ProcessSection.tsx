@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Search, Zap, Users } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -10,30 +9,31 @@ const steps = [
     title: "Identify",
     subtitle: "Identifying Your Skills",
     description:
-      "We start by understanding you — your strengths, interests, and hidden talents. Through personalized 1:1 sessions and structured assessments, we map out what makes you unique and where your potential lies.",
+      "We start by understanding you — your strengths, interests, and hidden talents. Through personalized 1:1 sessions and structured assessments, we map out what makes you unique.",
     icon: Search,
+    color: "#3B1A47",
   },
   {
     number: "02",
     title: "Build",
     subtitle: "Building These Skills",
     description:
-      "Once we know your strengths, we help you sharpen them. Through workshops, group sessions, and curated resources, we turn raw potential into real, marketable abilities that set you apart.",
+      "Once we know your strengths, we help you sharpen them. Through workshops, group sessions, and curated resources, we turn raw potential into real, marketable abilities.",
     icon: Zap,
+    color: "#6A4C93",
   },
   {
     number: "03",
     title: "Connect",
     subtitle: "Connecting with Industry Experts",
     description:
-      "Skills need context. We connect you with industry mentors and professionals through podcasts, networking sessions, and community events — so you can see exactly where your path leads.",
+      "Skills need context. We connect you with industry mentors and professionals through podcasts, networking sessions, and community events.",
     icon: Users,
+    color: "#B49FCC",
   },
 ];
 
 const ProcessSection = () => {
-  const [active, setActive] = useState(0);
-
   return (
     <section className="min-h-svh flex items-center bg-muted/30" style={{ padding: '6rem 8vw' }}>
       <div className="w-full max-w-6xl mx-auto">
@@ -46,7 +46,7 @@ const ProcessSection = () => {
           Our Approach
         </motion.p>
         <motion.h2
-          className="text-display text-foreground mb-16"
+          className="text-display text-foreground mb-20"
           style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,77 +56,67 @@ const ProcessSection = () => {
           Three steps to clarity.
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
-          {/* Left: Step list */}
-          <div className="flex flex-col gap-2">
-            {steps.map((step, i) => (
-              <button
-                key={step.number}
-                onClick={() => setActive(i)}
-                className={`text-left p-5 rounded-lg transition-all duration-300 border ${
-                  active === i
-                    ? 'bg-background border-border shadow-lg shadow-unblur-glow/10'
-                    : 'bg-transparent border-transparent hover:bg-background/50'
-                }`}
+        {/* Staircase / Ladder layout */}
+        <div className="relative flex flex-col gap-0">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.number}
+              className="relative flex"
+              style={{ paddingLeft: `${i * 12}%` }}
+              initial={{ opacity: 0, x: -40, y: 30 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: i * 0.2, ease }}
+            >
+              {/* Connector line */}
+              {i < steps.length - 1 && (
+                <motion.div
+                  className="absolute left-1/2 bottom-0 w-px h-8 -mb-8 z-0"
+                  style={{ backgroundColor: step.color, opacity: 0.3, left: `calc(${i * 12}% + 2rem)` }}
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.2 + 0.4, ease }}
+                />
+              )}
+
+              <motion.div
+                className="relative flex items-start gap-6 p-8 rounded-2xl bg-background border border-border w-full max-w-2xl"
+                style={{
+                  boxShadow: `0 8px 32px -8px ${step.color}20`,
+                  borderLeft: `4px solid ${step.color}`,
+                }}
+                whileHover={{ y: -4, boxShadow: `0 16px 48px -12px ${step.color}30` }}
+                transition={{ duration: 0.25 }}
               >
-                <div className="flex items-center gap-4">
+                {/* Step number block */}
+                <div
+                  className="flex-shrink-0 w-16 h-16 rounded-xl flex items-center justify-center"
+                  style={{ backgroundColor: `${step.color}15` }}
+                >
                   <span
-                    className={`text-display transition-colors duration-300 ${
-                      active === i ? 'text-unblur-primary' : 'text-muted-foreground/30'
-                    }`}
-                    style={{ fontSize: '2rem' }}
+                    className="text-2xl font-bold tabular-nums"
+                    style={{ color: step.color }}
                   >
                     {step.number}
                   </span>
-                  <div>
-                    <span
-                      className={`text-lg font-bold transition-colors duration-300 ${
-                        active === i ? 'text-foreground' : 'text-muted-foreground/50'
-                      }`}
-                    >
-                      {step.title}
-                    </span>
-                    <p
-                      className={`text-sm transition-colors duration-300 ${
-                        active === i ? 'text-muted-foreground' : 'text-muted-foreground/30'
-                      }`}
-                    >
-                      {step.subtitle}
-                    </p>
-                  </div>
                 </div>
-              </button>
-            ))}
-          </div>
 
-          {/* Right: Active step content */}
-          <div className="relative min-h-[300px] flex items-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, ease }}
-                className="w-full"
-              >
-                <div className="p-8 rounded-2xl bg-background border border-border shadow-xl shadow-unblur-glow/5">
-                  <div className="w-12 h-12 rounded-xl bg-unblur-primary/10 flex items-center justify-center mb-6">
-                    {(() => {
-                      const Icon = steps[active].icon;
-                      return <Icon className="w-6 h-6 text-unblur-primary" />;
-                    })()}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 mb-2">
+                    <step.icon className="w-5 h-5 flex-shrink-0" style={{ color: step.color }} />
+                    <h3 className="text-xl font-bold text-foreground">{step.subtitle}</h3>
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">
-                    {steps[active].subtitle}
-                  </h3>
-                  <p className="text-body text-muted-foreground">
-                    {steps[active].description}
+                  <p className="text-body text-muted-foreground text-sm leading-relaxed">
+                    {step.description}
                   </p>
                 </div>
               </motion.div>
-            </AnimatePresence>
-          </div>
+
+              {/* Spacer for staircase gap */}
+              {i < steps.length - 1 && <div className="h-8" />}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
