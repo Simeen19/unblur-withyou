@@ -13,8 +13,14 @@ const HeroSection = () => {
 
       <div className="relative z-10 flex items-baseline">
         <motion.span
-          className="text-display"
-          style={{ fontSize: 'clamp(4rem, 15vw, 12rem)', color: '#6A4C93' }}
+          className="font-bold tracking-tight"
+          style={{
+            fontSize: 'clamp(4rem, 15vw, 12rem)',
+            color: '#6A4C93',
+            fontFamily: "'Blacker Sans Display', serif",
+            lineHeight: 0.9,
+            letterSpacing: '-0.04em',
+          }}
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 2, duration: 1.2, ease }}
@@ -22,8 +28,14 @@ const HeroSection = () => {
           Un
         </motion.span>
         <motion.span
-          className="text-display"
-          style={{ fontSize: 'clamp(4rem, 15vw, 12rem)', color: '#3B1A47' }}
+          className="font-bold tracking-tight"
+          style={{
+            fontSize: 'clamp(4rem, 15vw, 12rem)',
+            color: '#3B1A47',
+            fontFamily: "'Blacker Sans Display', serif",
+            lineHeight: 0.9,
+            letterSpacing: '-0.04em',
+          }}
           initial={{ filter: 'blur(20px)', opacity: 0.6 }}
           animate={{ filter: 'blur(0px)', opacity: 1 }}
           transition={{ delay: 2, duration: 2, ease }}

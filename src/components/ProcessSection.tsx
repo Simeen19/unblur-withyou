@@ -36,7 +36,7 @@ const steps = [
 const ProcessSection = () => {
   return (
     <section className="min-h-svh flex items-center bg-muted/30" style={{ padding: '6rem 8vw' }}>
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full max-w-5xl mx-auto">
         <motion.p
           className="text-sm font-medium tracking-widest uppercase text-unblur-primary mb-4"
           initial={{ opacity: 0 }}
@@ -56,67 +56,70 @@ const ProcessSection = () => {
           Three steps to clarity.
         </motion.h2>
 
-        {/* Staircase / Ladder layout */}
-        <div className="relative flex flex-col gap-0">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              className="relative flex"
-              style={{ paddingLeft: `${i * 12}%` }}
-              initial={{ opacity: 0, x: -40, y: 30 }}
-              whileInView={{ opacity: 1, x: 0, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.2, ease }}
-            >
-              {/* Connector line */}
-              {i < steps.length - 1 && (
-                <motion.div
-                  className="absolute left-1/2 bottom-0 w-px h-8 -mb-8 z-0"
-                  style={{ backgroundColor: step.color, opacity: 0.3, left: `calc(${i * 12}% + 2rem)` }}
-                  initial={{ scaleY: 0 }}
-                  whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.2 + 0.4, ease }}
-                />
-              )}
+        {/* Staircase: bottom-to-top, steps go from most indented at top to least at bottom */}
+        <div className="relative flex flex-col gap-10">
+          {/* Vertical connector line */}
+          <motion.div
+            className="absolute hidden md:block"
+            style={{
+              left: '2.5rem',
+              top: '4rem',
+              bottom: '4rem',
+              width: '2px',
+              background: 'linear-gradient(to bottom, #3B1A47, #6A4C93, #B49FCC)',
+              opacity: 0.2,
+            }}
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease }}
+          />
 
+          {[...steps].reverse().map((step, i) => {
+            const actualIndex = steps.length - 1 - i; // 2, 1, 0
+            const indent = actualIndex * 10; // top card most indented, bottom least
+
+            return (
               <motion.div
-                className="relative flex items-start gap-6 p-8 rounded-2xl bg-background border border-border w-full max-w-2xl"
-                style={{
-                  boxShadow: `0 8px 32px -8px ${step.color}20`,
-                  borderLeft: `4px solid ${step.color}`,
-                }}
-                whileHover={{ y: -4, boxShadow: `0 16px 48px -12px ${step.color}30` }}
-                transition={{ duration: 0.25 }}
+                key={step.number}
+                className="relative"
+                style={{ marginLeft: `${indent}%` }}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.7, delay: i * 0.15, ease }}
               >
-                {/* Step number block */}
-                <div
-                  className="flex-shrink-0 w-16 h-16 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: `${step.color}15` }}
+                <motion.div
+                  className="flex items-start gap-6 p-7 rounded-2xl bg-background border border-border w-full max-w-xl"
+                  style={{
+                    boxShadow: `0 8px 32px -8px ${step.color}18`,
+                    borderLeft: `4px solid ${step.color}`,
+                  }}
+                  whileHover={{ y: -4, boxShadow: `0 16px 48px -12px ${step.color}28` }}
+                  transition={{ duration: 0.25 }}
                 >
-                  <span
-                    className="text-2xl font-bold tabular-nums"
-                    style={{ color: step.color }}
+                  <div
+                    className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center"
+                    style={{ backgroundColor: `${step.color}12` }}
                   >
-                    {step.number}
-                  </span>
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-2">
-                    <step.icon className="w-5 h-5 flex-shrink-0" style={{ color: step.color }} />
-                    <h3 className="text-xl font-bold text-foreground">{step.subtitle}</h3>
+                    <span className="text-xl font-bold tabular-nums" style={{ color: step.color }}>
+                      {step.number}
+                    </span>
                   </div>
-                  <p className="text-body text-muted-foreground text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
 
-              {/* Spacer for staircase gap */}
-              {i < steps.length - 1 && <div className="h-8" />}
-            </motion.div>
-          ))}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-2">
+                      <step.icon className="w-4 h-4 flex-shrink-0" style={{ color: step.color }} />
+                      <h3 className="text-lg font-bold text-foreground">{step.subtitle}</h3>
+                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

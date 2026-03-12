@@ -1,4 +1,5 @@
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/blacker-sans-display');
 
 @tailwind base;
 @tailwind components;
