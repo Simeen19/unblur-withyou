@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -11,14 +12,30 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.reason) {
+    if (!form.name.trim() || !form.email.trim() || !form.reason.trim()) {
       toast.error("Please fill in all fields");
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email.trim())) {
+      toast.error("Please enter a valid email");
+      return;
+    }
+
     setLoading(true);
-    // Simulate submission (backend will be connected)
-    await new Promise((r) => setTimeout(r, 1000));
+    const { error } = await supabase.from("contact_submissions").insert({
+      name: form.name.trim().slice(0, 100),
+      email: form.email.trim().slice(0, 255),
+      reason: form.reason.trim().slice(0, 1000),
+    });
     setLoading(false);
+
+    if (error) {
+      toast.error("Something went wrong. Please try again.");
+      return;
+    }
+
     setSubmitted(true);
     toast.success("Message sent successfully!");
   };
@@ -56,6 +73,7 @@ const ContactSection = () => {
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="Your name"
+                    maxLength={100}
                     className="w-full bg-muted border-none rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground/50 shadow-[0_0_0_1px_hsl(var(--border))] focus:shadow-[0_0_0_2px_hsl(var(--ring))] focus:outline-none transition-shadow duration-200"
                   />
                 </div>
@@ -66,6 +84,7 @@ const ContactSection = () => {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="you@example.com"
+                    maxLength={255}
                     className="w-full bg-muted border-none rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground/50 shadow-[0_0_0_1px_hsl(var(--border))] focus:shadow-[0_0_0_2px_hsl(var(--ring))] focus:outline-none transition-shadow duration-200"
                   />
                 </div>
@@ -76,6 +95,7 @@ const ContactSection = () => {
                     onChange={(e) => setForm({ ...form, reason: e.target.value })}
                     placeholder="Tell us why you'd like to connect with UnBlur..."
                     rows={4}
+                    maxLength={1000}
                     className="w-full bg-muted border-none rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground/50 shadow-[0_0_0_1px_hsl(var(--border))] focus:shadow-[0_0_0_2px_hsl(var(--ring))] focus:outline-none transition-shadow duration-200 resize-none"
                   />
                 </div>
@@ -89,7 +109,6 @@ const ContactSection = () => {
                 </motion.button>
               </form>
 
-              {/* Footer info */}
               <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-center gap-6 text-sm text-muted-foreground">
                 <span>UnBlur.withyou@gmail.com</span>
                 <span className="hidden sm:inline">·</span>
